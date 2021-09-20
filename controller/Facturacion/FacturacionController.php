@@ -3,7 +3,7 @@
 
     class FacturacionController{
 
-        public function pruebaBorrador(){
+        public function getFacturacion(){
             
             include_once '../view/facturas/prueba_factura.php';
         }
