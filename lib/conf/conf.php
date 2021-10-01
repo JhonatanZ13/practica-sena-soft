@@ -3,7 +3,7 @@
     $server="localhost";
     $user="root";
     $pass="";
-    $database="";
+    $database="senasoft";
     $port="3306";
 
 ?>
