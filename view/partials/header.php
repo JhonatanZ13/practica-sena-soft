@@ -26,6 +26,8 @@
                     </a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Productos</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?= getUrl("Inventario","Inventario","getInventario") ?>">Inventario</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Entrada Bodega</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Salida Bodega</a>
                 </div>
             </div>
             <!-- Page content wrapper-->

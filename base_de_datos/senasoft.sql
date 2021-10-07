@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2021 a las 20:33:27
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 7.4.21
+-- Tiempo de generación: 07-10-2021 a las 06:46:49
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,123 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `senasoft`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `cli_id` int(10) NOT NULL,
+  `cli_nombres` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `cli_apellidos` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `cli_identificacion` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`cli_id`, `cli_nombres`, `cli_apellidos`, `cli_identificacion`) VALUES
+(1, 'Freddy', 'Caicedo', '1144111444'),
+(2, 'Edwin', 'Sanchez', '4411444111');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entrada_bodega`
+--
+
+CREATE TABLE `entrada_bodega` (
+  `ent_bod_id` int(10) NOT NULL,
+  `ent_bod_fecha` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `prov_id` int(10) NOT NULL,
+  `usu_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entrada_bodega_detalle`
+--
+
+CREATE TABLE `entrada_bodega_detalle` (
+  `ent_det_id` int(10) NOT NULL,
+  `ent_det_cantidad` int(10) NOT NULL,
+  `ent_bod_id` int(10) NOT NULL,
+  `id_pro` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado`
+--
+
+CREATE TABLE `estado` (
+  `est_id` int(2) NOT NULL,
+  `est_nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estado`
+--
+
+INSERT INTO `estado` (`est_id`, `est_nombre`) VALUES
+(1, 'Activo'),
+(2, 'InActivo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura`
+--
+
+CREATE TABLE `factura` (
+  `fac_id` int(10) NOT NULL,
+  `fac_fecha` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `cli_id` int(10) NOT NULL,
+  `suc_id` int(10) NOT NULL,
+  `usu_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura_detalle`
+--
+
+CREATE TABLE `factura_detalle` (
+  `fac_det_id` int(10) NOT NULL,
+  `fac_det_cantidad` int(10) NOT NULL,
+  `fac_det_precio` int(10) NOT NULL,
+  `id_pro` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventario`
+--
+
+CREATE TABLE `inventario` (
+  `inv_id` int(10) NOT NULL,
+  `suc_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventario_producto`
+--
+
+CREATE TABLE `inventario_producto` (
+  `inv_pro_id` int(10) NOT NULL,
+  `inv_pro_cantidad` int(10) NOT NULL,
+  `id_pro` int(10) NOT NULL,
+  `inv_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -118,15 +235,332 @@ INSERT INTO `productos` (`id_pro`, `nombre_pro`, `unidades_en_existencia`, `unid
 (76, 'Licor Cloudberry', 57, 0, 1),
 (77, 'Salsa verde original Frankfurter', 32, 0, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+
+CREATE TABLE `proveedor` (
+  `prov_id` int(10) NOT NULL,
+  `prov_nit` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `prov_nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `prov_telefono` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`prov_id`, `prov_nit`, `prov_nombre`, `prov_telefono`) VALUES
+(1, '123456789', 'Importadora la mayor', '603309906'),
+(2, '465445465', 'Importadora la menor', '56565645');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `rol_id` int(10) NOT NULL,
+  `rol_nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`rol_id`, `rol_nombre`) VALUES
+(1, 'Super Administrador'),
+(2, 'Administrador'),
+(3, 'Empleado');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salida_bodega`
+--
+
+CREATE TABLE `salida_bodega` (
+  `sal_bod_id` int(10) NOT NULL,
+  `sal_bod_fecha` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `suc_id` int(10) NOT NULL,
+  `usu_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `salida_bodega_detalle`
+--
+
+CREATE TABLE `salida_bodega_detalle` (
+  `sal_det` int(10) NOT NULL,
+  `sal_det_cantidad` int(10) NOT NULL,
+  `sal_bod_id` int(10) NOT NULL,
+  `id_pro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursal`
+--
+
+CREATE TABLE `sucursal` (
+  `suc_id` int(10) NOT NULL,
+  `suc_nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `sucursal`
+--
+
+INSERT INTO `sucursal` (`suc_id`, `suc_nombre`) VALUES
+(1, 'sucursal 1 - Principal'),
+(2, 'sucursal 2 - El trébol');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `usu_id` int(10) NOT NULL,
+  `usu_nombres` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_correo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `usu_pass` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `est_id` int(10) NOT NULL,
+  `rol_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`usu_id`, `usu_nombres`, `usu_apellidos`, `usu_correo`, `usu_pass`, `est_id`, `rol_id`) VALUES
+(1, 'Juan David', 'Conejo', 'juanconejo@misena.edu.co', '123456', 1, 1),
+(2, 'Jhonatan ', 'Zambrano', 'Zambrano@misena.edu.co', '123456', 1, 1),
+(3, 'Felipe', 'Santofimio', 'santofimio@misena.edu.co', '123456', 1, 1);
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`cli_id`);
+
+--
+-- Indices de la tabla `entrada_bodega`
+--
+ALTER TABLE `entrada_bodega`
+  ADD PRIMARY KEY (`ent_bod_id`),
+  ADD KEY `prov_id` (`prov_id`),
+  ADD KEY `usu_id` (`usu_id`);
+
+--
+-- Indices de la tabla `entrada_bodega_detalle`
+--
+ALTER TABLE `entrada_bodega_detalle`
+  ADD PRIMARY KEY (`ent_det_id`),
+  ADD KEY `id_pro` (`id_pro`),
+  ADD KEY `ent_bod_id` (`ent_bod_id`);
+
+--
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD PRIMARY KEY (`est_id`);
+
+--
+-- Indices de la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD PRIMARY KEY (`fac_id`),
+  ADD KEY `cli_id` (`cli_id`),
+  ADD KEY `suc_id` (`suc_id`),
+  ADD KEY `usu_id` (`usu_id`);
+
+--
+-- Indices de la tabla `factura_detalle`
+--
+ALTER TABLE `factura_detalle`
+  ADD PRIMARY KEY (`fac_det_id`),
+  ADD KEY `id_pro` (`id_pro`);
+
+--
+-- Indices de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD PRIMARY KEY (`inv_id`),
+  ADD KEY `suc_id` (`suc_id`);
+
+--
+-- Indices de la tabla `inventario_producto`
+--
+ALTER TABLE `inventario_producto`
+  ADD PRIMARY KEY (`inv_pro_id`),
+  ADD KEY `id_pro` (`id_pro`),
+  ADD KEY `inv_id` (`inv_id`);
 
 --
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_pro`);
+
+--
+-- Indices de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  ADD PRIMARY KEY (`prov_id`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`rol_id`);
+
+--
+-- Indices de la tabla `salida_bodega`
+--
+ALTER TABLE `salida_bodega`
+  ADD PRIMARY KEY (`sal_bod_id`),
+  ADD KEY `suc_id` (`suc_id`),
+  ADD KEY `usu_id` (`usu_id`);
+
+--
+-- Indices de la tabla `salida_bodega_detalle`
+--
+ALTER TABLE `salida_bodega_detalle`
+  ADD PRIMARY KEY (`sal_det`),
+  ADD KEY `id_pro` (`id_pro`),
+  ADD KEY `sal_bod_id` (`sal_bod_id`);
+
+--
+-- Indices de la tabla `sucursal`
+--
+ALTER TABLE `sucursal`
+  ADD PRIMARY KEY (`suc_id`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`usu_id`),
+  ADD KEY `est_id` (`est_id`),
+  ADD KEY `rol_id` (`rol_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `cli_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `entrada_bodega`
+--
+ALTER TABLE `entrada_bodega`
+  MODIFY `ent_bod_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `entrada_bodega_detalle`
+--
+ALTER TABLE `entrada_bodega_detalle`
+  MODIFY `ent_det_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `estado`
+--
+ALTER TABLE `estado`
+  MODIFY `est_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `fac_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `factura_detalle`
+--
+ALTER TABLE `factura_detalle`
+  MODIFY `fac_det_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  MODIFY `inv_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `inventario_producto`
+--
+ALTER TABLE `inventario_producto`
+  MODIFY `inv_pro_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  MODIFY `prov_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `rol_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `salida_bodega`
+--
+ALTER TABLE `salida_bodega`
+  MODIFY `sal_bod_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `salida_bodega_detalle`
+--
+ALTER TABLE `salida_bodega_detalle`
+  MODIFY `sal_det` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sucursal`
+--
+ALTER TABLE `sucursal`
+  MODIFY `suc_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `usu_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `salida_bodega`
+--
+ALTER TABLE `salida_bodega`
+  ADD CONSTRAINT `salida_bodega_ibfk_1` FOREIGN KEY (`suc_id`) REFERENCES `sucursal` (`suc_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `salida_bodega_ibfk_2` FOREIGN KEY (`usu_id`) REFERENCES `usuario` (`usu_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`rol_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
