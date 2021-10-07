@@ -3,7 +3,7 @@
     <hr>
     <h4>Mis productos</h4>
 </div>
-<table class="table table-striped">
+<table class="table table-striped" id="inventario">
     <thead>
         <tr>
             <th>ID</th>
@@ -12,7 +12,7 @@
             <th>Cantidad</th>
             <th>Precio</th>
             <th>Estado</th>
-            <th>Acciones</th>
+            <th style="width: 200px;">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -24,32 +24,8 @@
             <td>$1000</td>
             <td>Activo</td>
             <td>
-                <button type="button" class="btn btn-primary">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Cuadernos</td>
-            <td>Es un cuaderno</td>
-            <td>10</td>
-            <td>$1000</td>
-            <td>Activo</td>
-            <td>
-                <button type="button" class="btn btn-primary">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Cuadernos</td>
-            <td>Es un cuaderno</td>
-            <td>10</td>
-            <td>$1000</td>
-            <td>Activo</td>
-            <td>
-                <button type="button" class="btn btn-primary">Editar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-danger float-end">Eliminar</button>
+                <button type="button" class="btn btn-primary float-end mx-2">Editar</button>
             </td>
         </tr>
     </tbody>

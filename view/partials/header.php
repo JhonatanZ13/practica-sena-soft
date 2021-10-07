@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.6.0/dt-1.11.3/datatables.min.css"/>
     <title>SENASOFT</title>
 </head>
 
@@ -23,6 +26,8 @@
                     </a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Productos</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?= getUrl("Inventario","Inventario","getInventario") ?>">Inventario</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Entrada Bodega</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Salida Bodega</a>
                 </div>
             </div>
             <!-- Page content wrapper-->

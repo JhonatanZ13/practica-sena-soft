@@ -1,0 +1,9 @@
+#box-search{
+    position: absolute;
+    list-style: none;
+}
+#box-search li:hover{
+    background: #f3f3f3;
+    cursor: pointer;
+}
+
