@@ -24,6 +24,10 @@
             }
             echo json_encode($resultado);
         }
+        
+        public function prueba(){
+            include_once "../view/facturas/prueba.php";
+        }
     }
 
 ?>

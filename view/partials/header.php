@@ -24,7 +24,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 d-flex justify-content-between align-items-center" href="<?= getUrl("Facturacion","Facturacion","getFacturacion") ?>">
                         Facturacion <span class="badge bg-danger rounded-pill">{{datos.cantidad}}</span>
                     </a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Productos</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?= getUrl("Facturacion","Facturacion","prueba") ?>">Prueba</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?= getUrl("Inventario","Inventario","getInventario") ?>">Inventario</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?= getUrl("EntradaBodega","EntradaBodega","consultar");?>">Entrada Bodega</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="">Salida Bodega</a>
